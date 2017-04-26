@@ -23,29 +23,13 @@ const TrainingPlanSchema = {
     }
 };
 
-export class MyRealm {
-
-    static instance;
-
-    constructor(){
-        if(MyRealm.instance){
-            return MyRealm.instance;
-        }
-
-        MyRealm.instance = new Realm({schema: [ExerciseSchema, TrainingPlanSchema]});
-
-
+const SettingsSchema = {
+    name: 'Settings',
+    properties: {
+        units: 'string',
+        weightIncreasing: 'bool'
     }
+};
 
-    static getInstance() {
-        if(!MyRealm.instance) {
-            new MyRealm();
-        }
-
-        return MyRealm.instance;
-    }
-
-}
-
-
+export const myRealm = new Realm({schema: [ExerciseSchema, TrainingPlanSchema, SettingsSchema]});
 

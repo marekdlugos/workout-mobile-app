@@ -6,20 +6,19 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, ListView, ScrollView, TouchableOpacity, TouchableHighlight, Navigator, Picker, Animated, Dimensions } from 'react-native';
 import { Container, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab, Input, Content, ListItem, List, Form, Item, Label } from 'native-base';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-
-import {TrainingPlanService} from '../../services/TrainingPlanService';
-
-const trainingPlanService = TrainingPlanService.getInstance();
+import {trainingPlanService} from '../../services/TrainingPlanService';
 
 export default class ExercisesList extends Component {
+    static propTypes = {
+        navigator: React.PropTypes.object.isRequired,
+        trainingPlan: React.PropTypes.object.isRequired
+    };
+
     constructor(props) {
         super(props);
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
         let exercises = this.props.trainingPlan.exercises;
-
         this.state = {
             dataSource: ds.cloneWithRows(exercises),
             ds: ds,
@@ -38,33 +37,22 @@ export default class ExercisesList extends Component {
 
     goToExercise(exercise){
         this.props.navigator.push({
-            id: 'Exercise',
-            trainingPlan: this.props.trainingPlan,
-            exercise: exercise,
+            component: <Exercise navigator={this.props.navigator} trainingPlan={this.props.trainingPlan} exercise={exercise}/>
         });
     }
 
     addExercise() {
         this.props.navigator.push({
-            id: 'NewExerciseForm',
-            trainingPlan: this.props.trainingPlan,
-            updateFunction: this.updateListView.bind(this),
+            component: <NewExerciseForm navigator={this.props.navigator} trainingPlan={this.props.trainingPlan} updateFunction={this.updateListView.bind(this)}/>,
             sceneConfig: Navigator.SceneConfigs.FloatFromBottom
         });
     }
 
     startTraining() {
-
+        console.log("not implemented yet");
     }
 
-
-
     render() {
-        const config = {
-            velocityThreshold: 0.3,
-            directionalOffsetThreshold: 80
-        };
-
         return (
             <Container>
                 <Header>
@@ -74,9 +62,7 @@ export default class ExercisesList extends Component {
                             <Text style={styles.blueText}>Back</Text>
                         </Button>
                     </Left>
-                    <Body>
-                        <Title>My Exercises</Title>
-                    </Body>
+                    <Body><Title>My Exercises</Title></Body>
                     <Right>
                         <Button transparent onPress={() => this.addExercise()} title="">
                             <Icon name='add'/>
@@ -84,7 +70,7 @@ export default class ExercisesList extends Component {
                     </Right>
                 </Header>
 
-                <Container >
+                <Container>
                     <View style={styles.header}>
                         <View style={styles.leftSideOfHeader}>
                             <Text>image</Text>
@@ -97,11 +83,8 @@ export default class ExercisesList extends Component {
                         </View>
                     </View>
 
-                    <ListView dataSource={this.state.dataSource} renderRow={(rowData) => this._renderRow(rowData)}/>
+                    <ListView dataSource={this.state.dataSource} renderRow={(rowData) => this._renderRow(rowData)} enableEmptySections={true}/>
                 </Container>
-
-
-
             </Container>
         );
     }
@@ -125,50 +108,19 @@ export default class ExercisesList extends Component {
     }
 }
 
-ExercisesList.propTypes = {
-    navigator: React.PropTypes.any.isRequired,
-    trainingPlan: React.PropTypes.any.isRequired
-};
-
-
-const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
-
 export class Exercise extends Component {
+    static propTypes = {
+        navigator: React.PropTypes.object.isRequired,
+        trainingPlan: React.PropTypes.object.isRequired,
+        exercise: React.PropTypes.object.isRequired,
+    };
+
     constructor(props) {
         super(props);
     }
 
     backButton() {
         this.props.navigator.pop();
-    }
-
-    animatedScroll(e) {
-        console.log(e.nativeEvent.contentOffset.x);
-        /*
-         const width = Dimensions.get('window');
-
-         const threshold = width / 5;
-         let x = e.nativeEvent.contentOffset.x;
-         let swiped = null;
-
-         x = x * -1;
-
-         console.log("a");
-         if (x > -50 && this.state.swiped !== WHITE) {
-         swiped = WHITE;
-         } else if (x < -50 && x > -threshold && this.state.swiped !== GREEN) {
-         swiped = GREEN;
-         }
-
-         console.log("a2");
-         if (swiped !== null) {
-         this.setState({swiped: swiped});
-
-         Animated.timing(this.state.color, {
-         toValue: swiped,
-         duration: 200
-         }).start();
-         }*/
     }
 
     render() {
@@ -181,13 +133,9 @@ export class Exercise extends Component {
                             <Text style={styles.blueText}>Back</Text>
                         </Button>
                     </Left>
-                    <Body>
-                    <Title>My Exercises</Title>
-                    </Body>
-                    <Right>
-                    </Right>
+                    <Body><Title>My Exercises</Title></Body>
+                    <Right/>
                 </Header>
-
 
                 <View>
                     <View style={exerciseStyles.exerciseName}>
@@ -212,11 +160,7 @@ export class Exercise extends Component {
 
                     <View style={exerciseStyles.completeButton}>
                         <Text>Not today</Text>
-                        <View style={exerciseStyles.animatedScroll} >
-                            <AnimatedScrollView horizontal={true} directionalLockEnabled={true} onScroll={this.animatedScroll} scrollEventThrottle={16} maximumZoomScale={1}>
-                                <Text style={{paddingLeft: 50, fontWeight: 'bold', fontSize: 18,}}>move</Text>
-                            </AnimatedScrollView>
-                        </View>
+
                         <Text>Success</Text>
 
                     </View>
@@ -279,6 +223,8 @@ const exerciseStyles = StyleSheet.create({
         justifyContent: 'space-around',
         borderColor: '#49494A',
         borderWidth: 1,
+        borderRadius: 15,
+        marginVertical: 40,
         marginHorizontal: 30,
         padding: 20,
     },
@@ -293,13 +239,13 @@ const exerciseStyles = StyleSheet.create({
     }
 });
 
-Exercise.propTypes = {
-    navigator: React.PropTypes.any.isRequired,
-    trainingPlan: React.PropTypes.any.isRequired,
-    exercise: React.PropTypes.any.isRequired,
-};
-
 export class NewExerciseForm extends Component {
+    static propTypes = {
+        navigator: React.PropTypes.object.isRequired,
+        trainingPlan: React.PropTypes.object.isRequired,
+        updateFunction: React.PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -374,12 +320,6 @@ export class NewExerciseForm extends Component {
         );
     }
 }
-
-NewExerciseForm.propTypes = {
-    navigator: React.PropTypes.any.isRequired,
-    trainingPlan: React.PropTypes.any.isRequired,
-    updateFunction: React.PropTypes.any.isRequired,
-};
 
 const styles = StyleSheet.create({
     header: {
