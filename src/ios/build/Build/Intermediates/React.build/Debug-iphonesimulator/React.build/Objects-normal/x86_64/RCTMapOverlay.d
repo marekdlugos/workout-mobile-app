@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/node_modules/react-native/React/Views/RCTMapOverlay.m \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/node_modules/react-native/React/Views/RCTMapOverlay.h
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/React/Views/RCTMapOverlay.m \
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/React/Views/RCTMapOverlay.h

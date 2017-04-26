@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/ios/build/Build/Intermediates/RealmJS.build/Debug-iphonesimulator/GCDWebServers.build/DerivedSources/GCDWebServers_vers.c
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Intermediates/RealmJS.build/Debug-iphonesimulator/GCDWebServers.build/DerivedSources/GCDWebServers_vers.c

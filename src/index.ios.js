@@ -10,8 +10,8 @@ import { AppRegistry, StyleSheet, Text, View, ListView, TouchableOpacity, Naviga
 import { Container, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab, Content, ListItem, List } from 'native-base';
 import Realm from 'realm'
 
-import TrainingPlanScreen from './components/TrainingPlanList';
-import ExercisesList from './components/ExercisesList';
+import TrainingPlanScreen from './components/trainingPlan/TrainingPlanList';
+import ExercisesList from './components/trainingPlan/ExercisesList';
 
 // Press Cmd+R to reload, Cmd+D or shake for dev menu
 
@@ -25,37 +25,6 @@ export default class WorkoutApp extends Component {
 
 
   }
-
-  /*
-
-    // Create Realm objects and write to local storage
-    realm.write(() => {
-    let myCar = realm.create('Car', {
-        make: 'Honda',
-        model: 'Civic',
-        miles: 1000,
-    });
-    myCar.miles += 20; // Update a property value
-});
-
-// Query Realm for all cars with a high mileage
-let cars = realm.objects('Car').filtered('miles > 1000');
-
-// Will return a Results object with our 1 car
-cars.length // => 1
-
-// Add another car
-realm.write(() => {
-    let myCar = realm.create('Car', {
-        make: 'Ford',
-        model: 'Focus',
-        miles: 2000,
-    });
-});
-
-// Query results are updated in realtime
-cars.length //
-*/
 
   switchScreen(index) {
       console.log(index);
@@ -93,7 +62,7 @@ cars.length //
                 <FooterTab>
                     <Button onPress={() => this.switchScreen(0)} title="">
                         <Icon name="apps" />
-                        <Text>Dashboard</Text>
+                        <Text>Home</Text>
                     </Button>
                     <Button onPress={() => this.switchScreen(1)} title="">
                         <Icon name="camera" />
@@ -118,6 +87,38 @@ cars.length //
   }
 }
 
+class MyFooter extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Footer>
+                <FooterTab>
+                    <Button onPress={() => this.switchScreen(0)} title="">
+                        <Icon name="apps" />
+                        <Text>Home</Text>
+                    </Button>
+                    <Button onPress={() => this.switchScreen(1)} title="">
+                        <Icon name="camera" />
+                        <Text>Trainings</Text>
+                    </Button>
+                    <Button active onPress={() => this.switchScreen(2)} title="">
+                        <Icon active name="navigate" />
+                        <Text>Stats</Text>
+
+                    </Button>
+                    <Button onPress={() => this.switchScreen(3)} title="">
+                        <Icon name="person" />
+                        <Text>Me</Text>
+                    </Button>
+
+                </FooterTab>
+            </Footer>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
   container: {

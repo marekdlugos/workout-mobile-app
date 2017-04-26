@@ -6,7 +6,7 @@
 	<dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		bpaBuUjudYcDlo2hUe60JSCO02M=
+		S8UozKAKYdujiiY3k3IWIWsBykE=
 		</data>
 		<key>Entypo.ttf</key>
 		<data>
@@ -243,7 +243,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		cFRtt2wzROFUtbZS5IHnQ9upb7Y=
+		g4Y2WFx7DuohU+k2jF9eKKX4cvg=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -271,7 +271,7 @@
 		</data>
 		<key>PlugIns/WorkoutAppTests.xctest.dSYM/Contents/Resources/DWARF/WorkoutAppTests</key>
 		<data>
-		/ai8snRuhf//E5SskDLZnsLP3Os=
+		WTbQDnyNBrILI7ZBEpAJM/MNiIM=
 		</data>
 		<key>PlugIns/WorkoutAppTests.xctest/Info.plist</key>
 		<data>
@@ -279,7 +279,7 @@
 		</data>
 		<key>PlugIns/WorkoutAppTests.xctest/WorkoutAppTests</key>
 		<data>
-		WvYmPrwEYN/C6f/MYqKEBUG1qOE=
+		omK96V/IxeW9bIFcAgvKVBxn/TY=
 		</data>
 		<key>PlugIns/WorkoutAppTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
@@ -300,11 +300,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bpaBuUjudYcDlo2hUe60JSCO02M=
+			S8UozKAKYdujiiY3k3IWIWsBykE=
 			</data>
 			<key>hash2</key>
 			<data>
-			+AFjoRC9Fpvmojh/T1u3r5P1ifEcfMnGR6MhFeZ710s=
+			3f1ku3OgjutUrrBHHLN4qABnTWVtXD6eS/DnHfCL6Vo=
 			</data>
 		</dict>
 		<key>Entypo.ttf</key>
@@ -1000,11 +1000,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/ai8snRuhf//E5SskDLZnsLP3Os=
+			WTbQDnyNBrILI7ZBEpAJM/MNiIM=
 			</data>
 			<key>hash2</key>
 			<data>
-			HWq9oZo+sB5/oqPmnfJdkJMBpTOXo4iRitW+5Bl/PEQ=
+			DA4o4Cw/UPVTmPh3n9RVlHwRyTwhKvBno+w7Vx8qCCk=
 			</data>
 		</dict>
 		<key>PlugIns/WorkoutAppTests.xctest/Info.plist</key>
@@ -1022,11 +1022,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WvYmPrwEYN/C6f/MYqKEBUG1qOE=
+			omK96V/IxeW9bIFcAgvKVBxn/TY=
 			</data>
 			<key>hash2</key>
 			<data>
-			zwKUzXiwjI7ulS5OuKwJgwK3EJT59h1ufTAjSiamtks=
+			malXFqLeJsCPYiVcZ/D8cBba57Cqo+hR2KUKMPwLY0Y=
 			</data>
 		</dict>
 		<key>PlugIns/WorkoutAppTests.xctest/_CodeSignature/CodeResources</key>

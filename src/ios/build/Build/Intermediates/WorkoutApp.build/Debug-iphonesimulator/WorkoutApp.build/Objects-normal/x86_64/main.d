@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/ios/WorkoutApp/main.m \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/ios/WorkoutApp/AppDelegate.h
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/WorkoutApp/main.m \
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/WorkoutApp/AppDelegate.h

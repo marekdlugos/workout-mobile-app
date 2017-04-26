@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/node_modules/realm/vendor/base64.cpp \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/node_modules/realm/src/../vendor/base64.hpp
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/realm/vendor/base64.cpp \
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/realm/src/../vendor/base64.hpp

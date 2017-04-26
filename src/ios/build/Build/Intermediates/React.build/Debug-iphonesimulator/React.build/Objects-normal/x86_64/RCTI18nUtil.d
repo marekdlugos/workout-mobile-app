@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/node_modules/react-native/React/Modules/RCTI18nUtil.m \
-  /Users/railchamidullin/Dropbox/Programing/JS/react_native/WorkoutApp/node_modules/react-native/React/Modules/RCTI18nUtil.h
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/React/Modules/RCTI18nUtil.m \
+  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/React/Modules/RCTI18nUtil.h
