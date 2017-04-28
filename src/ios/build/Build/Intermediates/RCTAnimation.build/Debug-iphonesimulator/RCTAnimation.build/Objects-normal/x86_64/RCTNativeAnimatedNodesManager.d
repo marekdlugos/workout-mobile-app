@@ -1,41 +1,41 @@
 dependencies: \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.m \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUIManager.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTViewManager.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventDispatcher.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/UIView+React.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTValueAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTAnimationDriver.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTEventAnimation.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAdditionAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTInterpolationAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTDiffClampAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTDivisionAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTModuloAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTMultiplicationAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTPropsAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTStyleAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTransformAnimatedNode.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTFrameAnimation.h \
-  /Users/railchamidullin/Dropbox/FEL/4sem/PDA/workout-mobile-app/src/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTSpringAnimation.h
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.m \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUIManager.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTViewManager.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventDispatcher.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/UIView+React.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTValueAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTAnimationDriver.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTEventAnimation.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAdditionAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTInterpolationAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTDiffClampAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTDivisionAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTModuloAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTMultiplicationAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTPropsAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTStyleAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTransformAnimatedNode.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTFrameAnimation.h \
+  /Users/railchamidullin/Google\ Drive/FEL/4sem/PDA/workout-mobile-app/WorkoutApp/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTSpringAnimation.h
