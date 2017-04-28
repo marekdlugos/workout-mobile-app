@@ -8,6 +8,9 @@ import { AppRegistry, StyleSheet, Text, View, ListView, ScrollView, TouchableOpa
 import { Container, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab, Input, Content, ListItem, List, Form, Item, Label } from 'native-base';
 
 import {trainingPlanService} from '../../services/TrainingPlanService';
+import {recordOfTrainingPlanService} from '../../services/RecordOfTrainingPlanService';
+import {settingsService} from '../../services/SettingsService';
+import {currentStateService} from '../../services/ActualStateService';
 
 export default class ExercisesList extends Component {
     static propTypes = {
@@ -19,9 +22,15 @@ export default class ExercisesList extends Component {
         super(props);
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         let exercises = this.props.trainingPlan.exercises;
+
+        let currentTrainedPlanName = currentStateService.getCurrentTrainingPlanName();
+
         this.state = {
             dataSource: ds.cloneWithRows(exercises),
             ds: ds,
+
+            trainingPlanIsActive: currentTrainedPlanName != null,
+            thisTrainingPlanIsActive: currentTrainedPlanName == this.props.trainingPlan.name,
         };
     }
 
@@ -37,7 +46,7 @@ export default class ExercisesList extends Component {
 
     goToExercise(exercise){
         this.props.navigator.push({
-            component: <Exercise navigator={this.props.navigator} trainingPlan={this.props.trainingPlan} exercise={exercise}/>
+            component: <Exercise trainingIsStarted={this.state.thisTrainingPlanIsActive} navigator={this.props.navigator} trainingPlan={this.props.trainingPlan} exercise={exercise}/>
         });
     }
 
@@ -48,11 +57,37 @@ export default class ExercisesList extends Component {
         });
     }
 
-    startTraining() {
-        console.log("not implemented yet");
+    startStopTraining() {
+        if(this.state.trainingPlanIsActive) {
+            // end training
+            let currentRecordOfTrainingPlan = recordOfTrainingPlanService.getRecordOfTrainingPlan(currentStateService.getCurrentRecordOfTrainingPlanId());
+
+            recordOfTrainingPlanService.setEndTimeOfRecordOfTrainingPlan(currentRecordOfTrainingPlan, new Date());
+            currentStateService.removeCurrentTrainingPlanState();
+        } else {
+            // start training
+            let record = recordOfTrainingPlanService.createRecordOfTrainingPlan(this.props.trainingPlan, new Date());
+            currentStateService.setCurrentTrainingPlan(this.props.trainingPlan, record);
+        }
+
+        this.updateState();
+    }
+
+    updateState() {
+        let currentTrainedPlanName = currentStateService.getCurrentTrainingPlanName();
+        this.setState({trainingPlanIsActive: currentTrainedPlanName != null});
+        this.setState({thisTrainingPlanIsActive: currentTrainedPlanName == this.props.trainingPlan.name});
     }
 
     render() {
+        let startTrainingButton;
+        if(this.state.trainingPlanIsActive && !this.state.thisTrainingPlanIsActive) startTrainingButton = (<Text>You are currently working on {currentStateService.getCurrentTrainingPlanName()}</Text>);
+        else startTrainingButton = (
+            <Button small block success={ !this.state.trainingPlanIsActive } danger={ this.state.trainingPlanIsActive } onPress={() => this.startStopTraining()} title="">
+                <Text>{this.state.trainingPlanIsActive ? 'Stop training' : 'Start training'}</Text>
+            </Button>
+        );
+
         return (
             <Container>
                 <Header>
@@ -65,7 +100,7 @@ export default class ExercisesList extends Component {
                     <Body><Title>My Exercises</Title></Body>
                     <Right>
                         <Button transparent onPress={() => this.addExercise()} title="">
-                            <Icon name='add'/>
+                            <Icon name='add' style={{fontSize: 35}}/>
                         </Button>
                     </Right>
                 </Header>
@@ -79,7 +114,7 @@ export default class ExercisesList extends Component {
                         <View style={styles.rightSideOfHeader}>
                             <Text style={{fontWeight: 'bold'}}>{this.props.trainingPlan.name}</Text>
                             <Text>{this.props.trainingPlan.exercises.length} exercises to go</Text>
-                            <Button small block light onPress={this.startTraining} title=""><Text>Start training</Text></Button>
+                            {startTrainingButton}
                         </View>
                     </View>
 
@@ -100,7 +135,7 @@ export default class ExercisesList extends Component {
                 </View>
 
                 <View style={styles.rightSideOfElement}>
-                    <Text style={{fontSize: 35}}>{rowData.weight} Kg</Text>
+                    <Text style={{fontSize: 35}}>{rowData.weight} {settingsService.getUnits() == "Kilograms" ? "Kg" : "Lbs"}</Text>
                 </View>
 
             </TouchableOpacity>
@@ -113,6 +148,7 @@ export class Exercise extends Component {
         navigator: React.PropTypes.object.isRequired,
         trainingPlan: React.PropTypes.object.isRequired,
         exercise: React.PropTypes.object.isRequired,
+        trainingIsStarted: React.PropTypes.bool.isRequired,
     };
 
     constructor(props) {
@@ -124,6 +160,21 @@ export class Exercise extends Component {
     }
 
     render() {
+        let completeButton;
+        if(this.props.trainingIsStarted) {
+            completeButton = (
+                <View style={exerciseStyles.completeButton}>
+                    <Button title="" onPress={() => console.log('not today')} danger>
+                        <Text>Not today</Text>
+                    </Button>
+
+                    <Button title="" onPress={() => console.log('success')} success>
+                        <Text>Success</Text>
+                    </Button>
+                </View>
+            );
+        }
+
         return(
             <Container>
                 <Header>
@@ -145,7 +196,7 @@ export class Exercise extends Component {
                     <View style={exerciseStyles.circles}>
                         <View style={exerciseStyles.weightCircle}>
                             <Text style={{fontSize: 40}}>{this.props.exercise.weight}</Text>
-                            <Text>kilograms</Text>
+                            <Text>{settingsService.getUnits()}</Text>
                         </View>
                         <View style={exerciseStyles.setsCircle}>
                             <Text style={{fontSize: 30}}>{this.props.exercise.noOfSets}</Text>
@@ -157,17 +208,8 @@ export class Exercise extends Component {
                         </View>
                     </View>
 
-
-                    <View style={exerciseStyles.completeButton}>
-                        <Text>Not today</Text>
-
-                        <Text>Success</Text>
-
-                    </View>
+                    {completeButton}
                 </View>
-
-
-
             </Container>
         );
     }
@@ -220,7 +262,7 @@ const exerciseStyles = StyleSheet.create({
     completeButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         borderColor: '#49494A',
         borderWidth: 1,
         borderRadius: 15,

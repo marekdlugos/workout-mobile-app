@@ -4,8 +4,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, ListView, TouchableOpacity, Navigator } from 'react-native';
-import { Container, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab, Content, ListItem, List } from 'native-base';
+import { AppRegistry, StyleSheet, Text, View, ListView, TouchableOpacity, Navigator, TextInput } from 'react-native';
+import { Container, Header, Title, Button, Left, Right, Body, Icon, Input, Form, Footer, FooterTab, Content, ListItem, List } from 'native-base';
 
 import {settingsService} from '../../services/SettingsService';
 
@@ -16,6 +16,9 @@ export default class UserSettings extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            nameOfUser: settingsService.getNameOfUSer(),
+        };
     }
 
     render() {
@@ -33,14 +36,24 @@ export default class UserSettings extends Component {
                     </Right>
                 </Header>
 
-                <Content>
+                <View>
+                    <View style={styles.header}>
+                        <View style={styles.picture}><Icon name="camera" style={{fontSize: 50}}/></View>
+
+                        <TextInput style={{height: 30, marginTop: 25, fontSize: 25}} value={this.state.nameOfUser} textAlign="center" onChangeText={(e) => this.setState({nameOfUser: e})}
+                                   onSubmitEditing={(event) => settingsService.setNameOfUser(event.nativeEvent.text)} autoCorrect={false}/>
+
+                    </View>
+
+
                     <List>
                         <ListItem button onPress={() => this.props.navigator.push({component: <SettingsPicker navigator={this.props.navigator} databaseFunction={(item) => settingsService.setUnits(item)} title="Units" items={["Kilograms", "Pounds"]}/>})}>
                             <Left>
                                 <Text>Units</Text>
                             </Left>
                             <Right>
-                                <Text>{settingsService.getUnits()}</Text>
+                                <Text style={{color: '#989898'}}>{settingsService.getUnits()}</Text>
+
                             </Right>
                         </ListItem>
 
@@ -49,16 +62,46 @@ export default class UserSettings extends Component {
                                 <Text>Automatic weight increasing</Text>
                             </Left>
                             <Right>
-                                <Text>{settingsService.getWeightIncreasing() == true ? 'On' : 'Off'}</Text>
+                                <Text style={{color: '#989898'}}>{settingsService.getWeightIncreasing() == true ? 'On' : 'Off'}</Text>
+
                             </Right>
                         </ListItem>
                     </List>
-                </Content>
+
+                </View>
 
             </Container>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    header: {
+        flex:0,
+        height: 170,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+
+        marginTop: 15,
+        borderBottomWidth: 1,
+        borderColor: '#BCBEC0',
+        paddingHorizontal: 15,
+        paddingBottom: 30,
+    },
+    picture: {
+        width: 100,
+        height: 100,
+        borderWidth: 1,
+        borderRadius: 50,
+        marginVertical: 20,
+
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#49494A',
+
+    },
+});
 
 class SettingsPicker extends Component {
     static propTypes = {
@@ -107,8 +150,3 @@ class SettingsPicker extends Component {
         );
     }
 }
-
-
-const styles = StyleSheet.create({
-
-});

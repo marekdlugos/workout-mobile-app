@@ -9,6 +9,8 @@ import { Container, Header, Title, Button, Left, Right, Body, Icon, Footer, Foot
 
 import TrainingPlanList from './components/trainingPlan/TrainingPlanList';
 import UserSettings from './components/user/UserSettings';
+import Statistics from './components/statistics/Statistics';
+import Dashboard from './components/dashboard/Dashboard';
 
 // Press Cmd+R to reload, Cmd+D or shake for dev menu
 
@@ -23,10 +25,10 @@ export default class WorkoutApp extends Component {
         return (
             <Container>
                 <Navigator initialRoute={{id: 'initial'}} renderScene={(route, navigator) => this.renderScene(route, navigator)}
-                    configureScene={(route) => {
-                        if (route.sceneConfig) return route.sceneConfig;
-                        return Navigator.SceneConfigs.HorizontalSwipeJump;
-                    }} />
+                           configureScene={(route) => {
+                               if (route.sceneConfig) return route.sceneConfig;
+                               return Navigator.SceneConfigs.FloatFromRight;
+                           }} />
 
                 <AppFooter/>
             </Container>
@@ -51,7 +53,7 @@ class AppFooter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeButton: 1
+            activeButton: 2
         };
 
         console.log(this.props.navigator);
@@ -60,7 +62,7 @@ class AppFooter extends Component {
     openDashboard() {
         this.setState({activeButton: 1});
         appNavigator.resetTo({
-            component: <TrainingPlanList navigator={appNavigator}/>,
+            component: <Dashboard navigator={appNavigator}/>,
         });
     }
 
@@ -74,7 +76,7 @@ class AppFooter extends Component {
     openStatistics() {
         this.setState({activeButton: 3});
         appNavigator.resetTo({
-            component: <UserSettings navigator={appNavigator}/>,
+            component: <Statistics navigator={appNavigator}/>,
         });
     }
 

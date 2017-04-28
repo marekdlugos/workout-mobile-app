@@ -26,6 +26,7 @@ class SettingsService {
             myRealm.write(() => myRealm.create('Settings', {
                 units: 'Kilograms',
                 weightIncreasing: true,
+                nameOfUser: "What's your name, stanger?",
             }));
         } else if (settingsObject.length != 1) console.log("Error there is more settings objects");
 
@@ -46,6 +47,14 @@ class SettingsService {
 
     getWeightIncreasing() {
         return this.getSettingsObject().weightIncreasing;
+    }
+
+    setNameOfUser(name) {
+        myRealm.write(() => this.getSettingsObject().nameOfUser = name);
+    }
+
+    getNameOfUSer() {
+        return this.getSettingsObject().nameOfUser;
     }
 
 }

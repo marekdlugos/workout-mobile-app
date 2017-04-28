@@ -12,6 +12,7 @@ import ExerciseList, {NewExerciseForm, Exercise} from './ExercisesList';
 
 
 import {trainingPlanService} from '../../services/TrainingPlanService';
+import {currentStateService} from '../../services/ActualStateService';
 
 export default class TrainingPlanList extends Component {
     static propTypes = {
@@ -50,6 +51,8 @@ export default class TrainingPlanList extends Component {
     }
 
     render() {
+        let currentTrainingPlan = currentStateService.getCurrentTrainingPlanName();
+
         return (
             <Container>
                 <Header>
@@ -57,14 +60,14 @@ export default class TrainingPlanList extends Component {
                     <Body><Title>Header</Title></Body>
                     <Right>
                         <Button transparent onPress={() => this.addTrainingPlan()} title="">
-                            <Icon name='add'/>
+                            <Icon name='add' style={{fontSize: 35}}/>
                         </Button>
                     </Right>
                 </Header>
 
                 <Content>
                     <ListView dataSource={this.state.dataSource} enableEmptySections={true} renderRow={(rowData) =>
-                        <TouchableOpacity style={styles.trainingPlanElement} onPress={() => this.goToExercises(rowData)}>
+                        <TouchableOpacity style={[styles.trainingPlanElement, currentTrainingPlan == rowData.name ? {backgroundColor: 'green'} : null]} onPress={() => this.goToExercises(rowData)}>
                             <View style={styles.trainingPlanElementLeft}>
                                 <Text style={styles.boldText}>{rowData.name}</Text>
                                 <Text>{rowData.exercises.length} exercises</Text>
