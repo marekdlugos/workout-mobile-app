@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, ListView, ScrollView, TouchableOpacity, TouchableHighlight, Navigator, Picker, Animated, Dimensions } from 'react-native';
 import { Container, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab, Input, Content, ListItem, List, Form, Item, Label } from 'native-base';
+import Svg, {Line, Rect, Path} from 'react-native-svg';
 
 import {trainingPlanService} from '../../services/TrainingPlanService';
 import {recordOfTrainingPlanService} from '../../services/RecordOfTrainingPlanService';
@@ -188,7 +189,7 @@ export class Exercise extends Component {
                     <Right/>
                 </Header>
 
-                <View>
+                <Content>
                     <View style={exerciseStyles.exerciseName}>
                         <Text style={{fontSize: 28, color: '#49494A'}}>{this.props.exercise.name}</Text>
                     </View>
@@ -209,7 +210,24 @@ export class Exercise extends Component {
                     </View>
 
                     {completeButton}
-                </View>
+                    <View style={exerciseStyles.statisticsPanel}>
+                        <Text style={{fontSize: 30, color: '#606060'}}>Stats</Text>
+                        <Text style={{color: '#505050'}}>In order to show the stats, you need to done your first training and keep going. Go to the gym, start your training now!</Text>
+                        <Svg width="320" height="100" style={{borderWidth: 1, marginTop: 20}}>
+                            <Line x1="0" y1="100" x2="40" y2="80" stroke="red" strokeWidth="2"/>
+                            <Line x1="40" y1="80" x2="80" y2="60" stroke="red" strokeWidth="2"/>
+                            <Line x1="80" y1="60" x2="120" y2="50" stroke="red" strokeWidth="2"/>
+                            <Line x1="120" y1="50" x2="160" y2="45" stroke="red" strokeWidth="2"/>
+                            <Line x1="160" y1="45" x2="200" y2="20" stroke="red" strokeWidth="2"/>
+
+                            <Line x1="200" y1="20" x2="240" y2="20" stroke="red" strokeWidth="2"/>
+                            <Line x1="240" y1="20" x2="280" y2="30" stroke="red" strokeWidth="2"/>
+                            <Line x1="280" y1="30" x2="320" y2="50" stroke="red" strokeWidth="2"/>
+
+                        </Svg>
+
+                    </View>
+                </Content>
             </Container>
         );
     }
@@ -223,6 +241,7 @@ const exerciseStyles = StyleSheet.create({
     },
     circles: {
         alignItems: 'center',
+        marginBottom: 40
     },
     weightCircle: {
         justifyContent: 'center',
@@ -266,7 +285,7 @@ const exerciseStyles = StyleSheet.create({
         borderColor: '#49494A',
         borderWidth: 1,
         borderRadius: 15,
-        marginVertical: 40,
+        marginBottom: 40,
         marginHorizontal: 30,
         padding: 20,
     },
@@ -276,8 +295,9 @@ const exerciseStyles = StyleSheet.create({
         position: 'absolute',
         borderColor: '#49494A',
         borderWidth: 1,
-        
-
+    },
+    statisticsPanel: {
+        paddingHorizontal: 30,
     }
 });
 
@@ -327,7 +347,7 @@ export class NewExerciseForm extends Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Title>New TrainingPlan</Title>
+                    <Title>New Exercise</Title>
                     </Body>
                     <Right>
                         <Button disabled={saveButtonIsDisabled} transparent onPress={() => this.saveButton()} title="">

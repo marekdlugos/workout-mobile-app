@@ -17,7 +17,7 @@ export default class UserSettings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nameOfUser: settingsService.getNameOfUSer(),
+            nameOfUser: settingsService.getNameOfUser(),
         };
     }
 

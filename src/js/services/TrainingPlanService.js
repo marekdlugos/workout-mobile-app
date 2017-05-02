@@ -57,19 +57,19 @@ class TrainingPlanService {
     generateTrainingPlans() {
         try {
             myRealm.write(() => myRealm.create('TrainingPlan', {
-                    name: 'Training Plan A',
+                    name: 'Upper body',
                     exercises: [{
-                        name: 'bench',
+                        name: 'Benchpress',
                         weight: 60,
                         noOfSets: 4,
                         noOfRepetitions: 10,
                     }, {
-                        name: 'biceps',
+                        name: 'Biceps',
                         weight: 60,
                         noOfSets: 4,
                         noOfRepetitions: 10,
                     }, {
-                        name: 'triceps',
+                        name: 'Triceps',
                         weight: 60,
                         noOfSets: 4,
                         noOfRepetitions: 10,
@@ -82,19 +82,19 @@ class TrainingPlanService {
 
         try {
             myRealm.write(() => myRealm.create('TrainingPlan', {
-                    name: 'Training Plan B',
+                    name: 'Back',
                     exercises: [{
-                        name: 'deadlift',
+                        name: 'Deadlift',
                         weight: 60,
                         noOfSets: 4,
                         noOfRepetitions: 10,
                     }, {
-                        name: 'shoulders',
+                        name: 'Row machine',
                         weight: 60,
                         noOfSets: 4,
                         noOfRepetitions: 10,
                     }, {
-                        name: 'shoulders2',
+                        name: 'Vertical push',
                         weight: 60,
                         noOfSets: 4,
                         noOfRepetitions: 10,
@@ -107,9 +107,9 @@ class TrainingPlanService {
 
         try {
             myRealm.write(() => myRealm.create('TrainingPlan', {
-                    name: 'Training Plan C',
+                    name: 'Legs',
                     exercises: [{
-                        name: 'legs',
+                        name: 'Legs',
                         weight: 60,
                         noOfSets: 4,
                         noOfRepetitions: 10,

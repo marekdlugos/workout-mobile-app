@@ -53,7 +53,7 @@ class SettingsService {
         myRealm.write(() => this.getSettingsObject().nameOfUser = name);
     }
 
-    getNameOfUSer() {
+    getNameOfUser() {
         return this.getSettingsObject().nameOfUser;
     }
 

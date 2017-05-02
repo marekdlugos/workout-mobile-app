@@ -93,15 +93,15 @@ class AppFooter extends Component {
             <Footer>
                 <FooterTab>
                     <Button active={this.state.activeButton === 1} onPress={() => this.openDashboard()} title="">
-                        <Icon name="apps" />
+                        <Icon name="home" />
                         <Text>Home</Text>
                     </Button>
                     <Button active={this.state.activeButton === 2} onPress={() => this.openTrainingPlans()} title="">
-                        <Icon name="camera" />
+                        <Icon name="bicycle" />
                         <Text>Trainings</Text>
                     </Button>
                     <Button active={this.state.activeButton === 3} onPress={() => this.openStatistics()} title="">
-                        <Icon active name="navigate" />
+                        <Icon active name="calendar" />
                         <Text>Stats</Text>
 
                     </Button>

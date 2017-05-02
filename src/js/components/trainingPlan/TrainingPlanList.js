@@ -67,7 +67,7 @@ export default class TrainingPlanList extends Component {
 
                 <Content>
                     <ListView dataSource={this.state.dataSource} enableEmptySections={true} renderRow={(rowData) =>
-                        <TouchableOpacity style={[styles.trainingPlanElement, currentTrainingPlan == rowData.name ? {backgroundColor: 'green'} : null]} onPress={() => this.goToExercises(rowData)}>
+                        <TouchableOpacity style={[styles.trainingPlanElement, currentTrainingPlan == rowData.name ? {backgroundColor: '#F4F4F4'} : null]} onPress={() => this.goToExercises(rowData)}>
                             <View style={styles.trainingPlanElementLeft}>
                                 <Text style={styles.boldText}>{rowData.name}</Text>
                                 <Text>{rowData.exercises.length} exercises</Text>
@@ -120,7 +120,7 @@ class NewTrainingPlanForm extends Component {
                             <Text style={styles.blueText}>Cancel</Text>
                         </Button>
                     </Left>
-                    <Body><Title>New TrainingPlan</Title></Body>
+                    <Body><Title>New Training</Title></Body>
                     <Right>
                         <Button transparent onPress={() => this.saveButton()} title="">
                             <Text style={styles.blueText}>Save</Text>
