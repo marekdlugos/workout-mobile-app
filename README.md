@@ -17,10 +17,11 @@ What things you need to install the software and how to install them
 
 ### Installing
 
-* cd ./workout-mobile-app/src
-* npm install
-* react-native run-ios
-
+```
+cd ./workout-mobile-app/src
+npm install
+react-native run-ios
+```
 
 ## Running the tests
 
