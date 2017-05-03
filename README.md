@@ -12,27 +12,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-```
-Give examples
-```
+* Node.JS - package manager npm - https://docs.npmjs.com/getting-started/installing-node
+* React native - http://facebook.github.io/react-native/docs/getting-started.html
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+* cd ./workout-mobile-app/src
+* npm install
+* react-native run-ios
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
@@ -60,7 +48,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Swift](https://swift.org) - Swift, programming language for creating iOS apps
+* [React native](http://facebook.github.io/react-native/) - JS library for creating multiplatform mobile apps
 
 ## Contributing
 
