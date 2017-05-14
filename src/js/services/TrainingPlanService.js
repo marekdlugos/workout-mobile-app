@@ -49,10 +49,27 @@ class TrainingPlanService {
         return myRealm.objects('TrainingPlan');
     }
 
+    getTrainingPlanByPrimaryKey(key) {
+        return myRealm.objectForPrimaryKey('TrainingPlan', String(key));
+    }
+
     getExercises() {
         console.log('getting all exercises');
         return myRealm.objects('Exercise');
     }
+
+    setTrainingPlanListener(func) {
+        myRealm.objects('TrainingPlan').addListener((objects, changes) => {
+            console.log('training plan has changed')
+
+            changes.insertions.forEach((index) => func())
+
+            changes.modifications.forEach((index) => func())
+
+            changes.deletions.forEach((index) => func())
+        })
+    }
+
 
     generateTrainingPlans() {
         try {

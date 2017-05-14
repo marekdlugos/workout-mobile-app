@@ -4,6 +4,7 @@
 'use strict';
 
 import {myRealm} from '../config/Config';
+import {trainingPlanService} from './TrainingPlanService';
 
 const singleton = Symbol();
 const singletonEnforcer = Symbol();
@@ -17,8 +18,18 @@ class RecordOfTrainingPlanService {
     static getInstance() {
         if(!this[singleton]) {
             this[singleton] = new RecordOfTrainingPlanService(singletonEnforcer);
+            //RecordOfTrainingPlanService.getInstance().generateRecordsOfTrainingPlans();
         }
         return this[singleton];
+    }
+
+    generateRecordsOfTrainingPlans() {
+        let trainingPlan = trainingPlanService.getTrainingPlans()[0];
+        for(let j = 0; j < 3; ++j) {
+            for (let i = 0; i < 10; ++i) {
+                this.createRecordOfTrainingPlan(trainingPlan, new Date(2017, 4+j, 1+3*i));
+            }
+        }
     }
 
     createRecordOfExercise(exercise) {
@@ -27,12 +38,15 @@ class RecordOfTrainingPlanService {
             weight: exercise.weight,
             noOfSets: exercise.noOfSets,
             noOfRepetitions: exercise.noOfRepetitions,
-            completed: false,
         };
     }
 
     setEndTimeOfRecordOfTrainingPlan(recordOfTrainingPlan, endOfTraining) {
         myRealm.write(() => recordOfTrainingPlan.endOfTraining = endOfTraining);
+    }
+
+    setCompletionOfExercise(recordOfExercise, isCompleted) {
+        myRealm.write(() => recordOfExercise.completed = isCompleted);
     }
 
     createRecordOfTrainingPlan(trainingPlan, startOfTraining) {
@@ -57,8 +71,7 @@ class RecordOfTrainingPlanService {
     }
 
     generateRecordOfTrainingPlanId() {
-        let result = this.getRecordsOfTrainingPlans();
-        return result.length;
+        return this.getRecordsOfTrainingPlans().length;
     }
 
     getRecordsOfTrainingPlans() {
@@ -67,6 +80,7 @@ class RecordOfTrainingPlanService {
     }
 
     getRecordOfTrainingPlan(id) {
+        if(id === null) return;
         return myRealm.objectForPrimaryKey('RecordOfTrainingPlan', id);
     }
 

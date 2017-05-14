@@ -44,7 +44,7 @@ const RecordOfExerciseSchema = {
         weight: 'int',
         noOfSets: 'int',
         noOfRepetitions: 'int',
-        completed: 'bool',
+        completed: {type: 'bool', optional: true},
     }
 };
 

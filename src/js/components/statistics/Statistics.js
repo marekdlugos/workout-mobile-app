@@ -20,11 +20,43 @@ export default class Statistics extends Component {
 
     constructor(props) {
         super(props);
+        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         let records = recordOfTrainingPlanService.getRecordsOfTrainingPlans().sorted('startOfTraining');
+
+        this.state = {
+            records: records,
+            recordsInList: ds.cloneWithRows([]),
+            activeDate: null,
+        };
 
     }
 
+    timeToString(date) {
+        if(date == null) return;
+
+        return `${date.getHours()}:${date.getMinutes()}`;
+    }
+
     render() {
+        let listOfRecords;
+        if(this.state.records.length === 0) listOfRecords = (
+            <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+                <Text style={{fontSize: 20}}>No data to display</Text>
+                <Text>Start by finishing your first training</Text>
+            </View>);
+        else listOfRecords = (
+            <ListView dataSource={this.state.recordsInList} enableEmptySections={true} renderRow={(item) =>
+                        <View style={styles.listItem}>
+                            <Text style={{fontWeight: 'bold'}}>Training: {item.trainingPlanName}</Text>
+                            <Text>{item.startOfTraining != null ? item.startOfTraining.toString() : ''}</Text>
+                            <Text>Start: {this.timeToString(item.startOfTraining)}</Text>
+                            <Text>End: {this.timeToString(item.endOfTraining)}</Text>
+                            <Text>Exercises: {item.exercises.length}</Text>
+                            {this._renderExercises(item.exercises)}
+                        </View>
+                    }/>
+        );
+
         return (
             <Container>
                 <Header>
@@ -38,34 +70,43 @@ export default class Statistics extends Component {
                 <Container>
                     {this._renderCalendar()}
 
-                    <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
-                        <Text style={{fontSize: 20}}>No data to display</Text>
-                        <Text>Start by finishing your first training</Text>
-                    </View>
-
-                    <List dataArray={recordOfTrainingPlanService.getRecordsOfTrainingPlans()} renderRow={(item) =>
-                        <ListItem style={{height: 100}}>
-                            <View style={{flexDirection: 'column'}}>
-                                <Text>{item.id}</Text>
-                                <Text>{item.trainingPlanName}</Text>
-                                <Text>{item.startOfTraining == null ? 'none' : item.startOfTraining.toString()}</Text>
-                                <Text>{item.endOfTraining == null ? 'none' : item.endOfTraining.toString()}</Text>
-                                <Text>{item.exercises.length}</Text>
-                            </View>
-                        </ListItem>
-                    }/>
+                    {listOfRecords}
                 </Container>
-
             </Container>
         );
     }
 
+    getExerciseStateStyle(exercise) {
+        if(exercise.completed === null) return {color: '#4e92DF'};
+
+        if(exercise.completed === true) return {color: 'green'};
+        else return {color: '#FB3D38'};
+    }
+
+    _renderExercises(exercises) {
+        let exercisesList = [];
+        console.log(exercises[0]);
+        for(let i = 0; i < exercises.length; ++i) exercisesList.push(
+            <View key={i}>
+                <Text style={this.getExerciseStateStyle(exercises[i])}>Name: {exercises[i].exerciseName}</Text>
+            </View>
+        );
+
+            return exercisesList;
+    }
+
     _renderCalendar() {
-        let records = recordOfTrainingPlanService.getRecordsOfTrainingPlans().sorted('startOfTraining');
-        //let firstMonth = records[0].startOfTraining.getMonth(), lastMonth = records[records.length-1].startOfTraining.getMonth();
+        let records = this.state.records;
+
+        let firstMonth = 0, lastMonth = 0;
+
+        if(records.length > 0) {
+            firstMonth = records[0].startOfTraining.getMonth();
+            lastMonth = records[records.length-1].startOfTraining.getMonth();
+        }
 
         let months = [];
-        for(let i = 0; i <= 3; ++i) months.push(this._renderMonth(2017, i));
+        for(let i = firstMonth; i <= lastMonth; ++i) months.push(this._renderMonth(2017, i));
 
         return (
             <Swiper loop={false} showsPagination={false} index={0} height={240}>
@@ -124,12 +165,12 @@ export default class Statistics extends Component {
             date = new Date(year, month, 1);
             if(i != 0) date = this.getDateOfMonday(date, i);
 
-            calendarRows.push(this._renderCalendarRow(date));
+            calendarRows.push(this._renderCalendarRow(i, date));
         }
 
         return (
-            <View style={styles.weekList}>
-                <View style={{flex: 1, justifyContent: 'center', paddingLeft: 5}}><Text style={{fontWeight: 'bold', fontSize: 17}}>{this.getMonthName(date.getMonth() + 1)} {date.getFullYear()}</Text></View>
+            <View style={styles.weekList} key={month}>
+                <View style={{flex: 1, justifyContent: 'center', paddingLeft: 5}}><Text style={{fontWeight: 'bold', fontSize: 17}}>{this.getMonthName(date.getMonth())} {date.getFullYear()}</Text></View>
                 <View style={styles.nameOfDays}>
                     <Text>Mon</Text>
                     <Text>Tue</Text>
@@ -144,31 +185,50 @@ export default class Statistics extends Component {
         );
     }
 
-    _renderCalendarRow(fromDate) {
+    _renderCalendarRow(key, fromDate) {
         let calendarRow = [];
         let startDayInWeek = this.convertToMonSunWeek(fromDate.getDay());
         let startDate = fromDate.getDate();
 
-        for(let i = 0; i < startDayInWeek-1; ++i) calendarRow.push(<View style={styles.nonActiveDate}/>);
+        for(let i = 0; i < startDayInWeek-1; ++i) calendarRow.push(<View key={`empty_0${i}`} style={styles.nonActiveDate}/>);
         for(let i = 0; i < 8-startDayInWeek; ++i) {
             let lastDayInMonth = new Date(fromDate.getYear(), fromDate.getMonth(), 31).getMonth() == fromDate.getMonth() ? 31 : 30;
 
-            if(startDate+i <= lastDayInMonth) calendarRow.push(this._renderCalendarItem(startDate + i, i == 8-startDayInWeek-1 | i == 8-startDayInWeek-2));
-            else calendarRow.push(<View style={styles.nonActiveDate}/>);
+            if(startDate+i <= lastDayInMonth) {
+                let date = new Date(fromDate.getFullYear(), fromDate.getMonth(), startDate+i);
+                calendarRow.push(this._renderCalendarItem(date, (i == 8 - startDayInWeek - 1 | i == 8 - startDayInWeek - 2)));
+            } else calendarRow.push(<View key={`empty_${i}0`} style={styles.nonActiveDate}/>);
         }
 
 
         return (
-            <View style={styles.dates}>
+            <View style={styles.dates} key={key}>
                 {calendarRow}
             </View>
         );
     }
 
-    _renderCalendarItem(date, weekend) {
+    recordsInDate(date) {
+        let nextDay = new Date(date.getFullYear(), date.getMonth(), date.getDate()+1, 0, 0, 0);
+        return this.state.records.filtered('startOfTraining >= $0 && startOfTraining < $1', date, nextDay);
+    }
+
+    listRecords(date) {
+        this.setState({recordsInList: this.state.recordsInList.cloneWithRows(this.recordsInDate(date))});
+        this.setState({activeDate: date});
+    }
+
+    dateIsActive(date) {
+        if(this.state.activeDate === null) return false;
+        return this.state.activeDate.getTime() === date.getTime();
+    }
+
+    _renderCalendarItem(date, isWeekend) {
+        const dateHasARecord = this.recordsInDate(date).length !== 0;
+
         return (
-            <TouchableOpacity key={date} onPress={() => this} disabled={true} title="">
-                <View style={ date == 3 ? styles.activeDate : styles.nonActiveDate}><Text style={date == 3 ? styles.activeDateText : (weekend ? styles.weekendTextColor : null ) }>{date}</Text></View>
+            <TouchableOpacity key={date.getDate()} onPress={() => this.listRecords(date)} disabled={!dateHasARecord} title="">
+                <View style={[styles.nonActiveDate, dateHasARecord ? styles.existingRecord : null, this.dateIsActive(date) ? styles.activeDate : null]}><Text style={dateHasARecord ? styles.existingRecordText : (isWeekend ? styles.weekendTextColor : null)}>{date.getDate()}</Text></View>
             </TouchableOpacity>
         );
     }
@@ -204,22 +264,27 @@ const styles = StyleSheet.create({
         width: 25,
         height: 25,
     },
-    activeDate: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 50,
-        borderWidth: 1,
-        width: 25,
-        height: 25,
-        borderColor: '#FB3D38',
-        backgroundColor: '#FB3D38',
+    existingRecord: {
+        borderColor: '#000000',
+        backgroundColor: '#000000',
     },
-    activeDateText: {
+    existingRecordText: {
         color: 'white',
         fontWeight: 'bold',
+    },
+    activeDate: {
+        borderColor: '#FB3D38',
+        backgroundColor: '#FB3D38',
     },
     weekendTextColor: {
         color: '#A7A7A7',
     },
 
+    listItem: {
+        flexDirection: 'column',
+        borderBottomWidth: 1,
+        borderColor: '#BCBEC0',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+    },
 });

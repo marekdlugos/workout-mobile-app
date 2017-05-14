@@ -12,6 +12,10 @@ import UserSettings from './components/user/UserSettings';
 import Statistics from './components/statistics/Statistics';
 import Dashboard from './components/dashboard/Dashboard';
 
+import {currentStateService} from './services/ActualStateService';
+import {trainingPlanService} from './services/TrainingPlanService';
+import ExerciseList from './components/trainingPlan/ExercisesList';
+
 // Press Cmd+R to reload, Cmd+D or shake for dev menu
 
 let appNavigator;
@@ -30,6 +34,7 @@ export default class WorkoutApp extends Component {
                                return Navigator.SceneConfigs.FloatFromRight;
                            }} />
 
+                <CurrentTrainingPlan/>
                 <AppFooter/>
             </Container>
 
@@ -38,7 +43,7 @@ export default class WorkoutApp extends Component {
 
     renderScene(route, navigator) {
         appNavigator = navigator;
-        var screen = route.component;
+        let screen = route.component;
         if(route.id === 'initial') screen = (<TrainingPlanList navigator={navigator}/>);
 
         return (
@@ -49,14 +54,58 @@ export default class WorkoutApp extends Component {
     }
 }
 
+class CurrentTrainingPlan extends Component {
+    constructor(props) {
+        super(props);
+
+        let currentTrainingPlanName = currentStateService.getCurrentTrainingPlanName();
+        this.state = {
+            currentTrainingPlan: trainingPlanService.getTrainingPlanByPrimaryKey(currentTrainingPlanName),
+        };
+
+        currentStateService.setCurrentTrainingPlanModificationListener((object) => {
+            if(object) this.setState({currentTrainingPlan: trainingPlanService.getTrainingPlanByPrimaryKey(object.currentTrainingPlanName)})
+        })
+    }
+
+    goToExercises(trainingPlan) {
+        console.log("go to exercises from currentTrainingPlan panel");
+        appNavigator.push({
+            component: <ExerciseList navigator={appNavigator} trainingPlan={trainingPlan}/>,
+            sceneConfig: Navigator.SceneConfigs.FloatFromBottom
+        });
+    }
+
+    render() {
+        if(!this.state.currentTrainingPlan) return (<View/>);
+
+        return (
+            <TouchableOpacity style={styles.currentTrainingPlanPanel} onPress={() => this.goToExercises(this.state.currentTrainingPlan)}>
+                <Text style={styles.boldText}>Current training: {this.state.currentTrainingPlan.name}</Text>
+            </TouchableOpacity>
+        )
+    }
+}
+
+const styles = StyleSheet.create({
+    currentTrainingPlanPanel: {
+        paddingLeft: 10,
+        justifyContent: 'space-around',
+        height: 50,
+        backgroundColor: '#4e92DF',
+    },
+    boldText: {
+        fontWeight: 'bold',
+        color:'white',
+    },
+});
+
 class AppFooter extends Component {
     constructor(props) {
         super(props);
         this.state = {
             activeButton: 2
         };
-
-        console.log(this.props.navigator);
     }
 
     openDashboard() {
@@ -115,22 +164,3 @@ class AppFooter extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-});

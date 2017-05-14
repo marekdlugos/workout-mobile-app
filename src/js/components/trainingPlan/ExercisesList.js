@@ -32,6 +32,8 @@ export default class ExercisesList extends Component {
 
             trainingPlanIsActive: currentTrainedPlanName != null,
             thisTrainingPlanIsActive: currentTrainedPlanName == this.props.trainingPlan.name,
+
+            currentRecordOfTrainingPlan: recordOfTrainingPlanService.getRecordOfTrainingPlan(currentStateService.getCurrentRecordOfTrainingPlanId()),
         };
     }
 
@@ -47,13 +49,13 @@ export default class ExercisesList extends Component {
 
     goToExercise(exercise){
         this.props.navigator.push({
-            component: <Exercise trainingIsStarted={this.state.thisTrainingPlanIsActive} navigator={this.props.navigator} trainingPlan={this.props.trainingPlan} exercise={exercise}/>
+            component: <Exercise trainingIsStarted={this.state.thisTrainingPlanIsActive} navigator={this.props.navigator} trainingPlan={this.props.trainingPlan} exercise={exercise} updateFunction={() => this.updateListView()}/>
         });
     }
 
     addExercise() {
         this.props.navigator.push({
-            component: <NewExerciseForm navigator={this.props.navigator} trainingPlan={this.props.trainingPlan} updateFunction={this.updateListView.bind(this)}/>,
+            component: <NewExerciseForm navigator={this.props.navigator} trainingPlan={this.props.trainingPlan} updateFunction={() => this.updateListView()}/>,
             sceneConfig: Navigator.SceneConfigs.FloatFromBottom
         });
     }
@@ -69,6 +71,7 @@ export default class ExercisesList extends Component {
             // start training
             let record = recordOfTrainingPlanService.createRecordOfTrainingPlan(this.props.trainingPlan, new Date());
             currentStateService.setCurrentTrainingPlan(this.props.trainingPlan, record);
+            this.setState({currentRecordOfTrainingPlan: recordOfTrainingPlanService.getRecordOfTrainingPlan(currentStateService.getCurrentRecordOfTrainingPlanId())});
         }
 
         this.updateState();
@@ -125,12 +128,28 @@ export default class ExercisesList extends Component {
         );
     }
 
+    getExerciseStateStyle(exercise) {
+        if(exercise.completed === null) return {color: '#4e92DF'};
+
+        if(exercise.completed === true) return {color: 'green'};
+        else return {color: '#FB3D38'};
+    }
+
     _renderRow(rowData){
+        let recordOfExercise, completed;
+        if(this.state.thisTrainingPlanIsActive) {
+            recordOfExercise = this.state.currentRecordOfTrainingPlan.exercises.find((e) => e.exerciseName === rowData.name);
+            console.log(recordOfExercise);
+            completed = (
+                <Text style={this.getExerciseStateStyle(recordOfExercise)}>{recordOfExercise.completed === null ? 'todo' : (recordOfExercise.completed===true) ? 'completed' : 'next time'}</Text>
+            );
+        }
+
         return (
             <TouchableOpacity style={styles.exerciseElement} onPress={() => this.goToExercise(rowData)}>
 
                 <View style={styles.leftSideOfElement}>
-                    <Text style={{fontWeight: 'bold', fontSize: 18,}}>{rowData.name}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 18,}}>{rowData.name} {completed}</Text>
                     <Text>{rowData.noOfSets} Sets</Text>
                     <Text>{rowData.noOfRepetitions} Repetitions</Text>
                 </View>
@@ -150,26 +169,57 @@ export class Exercise extends Component {
         trainingPlan: React.PropTypes.object.isRequired,
         exercise: React.PropTypes.object.isRequired,
         trainingIsStarted: React.PropTypes.bool.isRequired,
+        updateFunction: React.PropTypes.func.isRequired,
     };
 
     constructor(props) {
         super(props);
+
+        if(this.props.trainingIsStarted) {
+            let currentRecordOfTrainingPlanId = currentStateService.getCurrentRecordOfTrainingPlanId();
+            let currentRecordOfTrainingPlan = recordOfTrainingPlanService.getRecordOfTrainingPlan(currentRecordOfTrainingPlanId);
+            let recordOfExercise = currentRecordOfTrainingPlan.exercises.find((e) => e.exerciseName === this.props.exercise.name);
+
+            this.state = {
+                recordOfExercise: recordOfExercise,
+            }
+        }
     }
 
     backButton() {
         this.props.navigator.pop();
     }
 
+    exerciseCompleted() {
+        recordOfTrainingPlanService.setCompletionOfExercise(this.state.recordOfExercise,true);
+        this.props.navigator.pop();
+        this.props.updateFunction();
+    }
+
+    exerciseNotCompleted() {
+        recordOfTrainingPlanService.setCompletionOfExercise(this.state.recordOfExercise,false);
+        this.props.navigator.pop();
+        this.props.updateFunction();
+    }
+
     render() {
+        //console.log(this.state.recordOfExercise.completed);
+
         let completeButton;
-        if(this.props.trainingIsStarted) {
+        if(this.props.trainingIsStarted && this.state.recordOfExercise.completed !== null) {
             completeButton = (
                 <View style={exerciseStyles.completeButton}>
-                    <Button title="" onPress={() => console.log('not today')} danger>
+                    <Text>{this.state.recordOfExercise.completed ? 'successfully completed' : 'next time'}</Text>
+                </View>
+            );
+        } else if(this.props.trainingIsStarted) {
+            completeButton = (
+                <View style={exerciseStyles.completeButton}>
+                    <Button title="" onPress={() => this.exerciseNotCompleted()} danger>
                         <Text>Not today</Text>
                     </Button>
 
-                    <Button title="" onPress={() => console.log('success')} success>
+                    <Button title="" onPress={() => this.exerciseCompleted()} success>
                         <Text>Success</Text>
                     </Button>
                 </View>

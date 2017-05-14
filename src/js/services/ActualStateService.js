@@ -51,6 +51,14 @@ class CurrentStateService {
         return this.getActualStateObject().currentRecordOfTrainingPlanId;
     }
 
+    setCurrentTrainingPlanModificationListener(func) {
+        myRealm.objects('ActualState').addListener((objects, changes) => {
+            changes.modifications.forEach((index) => {
+                func(objects[index])
+            })
+        })
+    }
+
 }
 
 export const currentStateService = CurrentStateService.getInstance();

@@ -9,6 +9,7 @@ import { Container, Header, Title, Button, Left, Right, Body, Icon, Footer, Foot
 
 
 import ExerciseList, {NewExerciseForm, Exercise} from './ExercisesList';
+import {trainingPlanRest} from '../../rest/TrainingPlanRest'
 
 
 import {trainingPlanService} from '../../services/TrainingPlanService';
@@ -21,18 +22,29 @@ export default class TrainingPlanList extends Component {
 
     constructor(props) {
         super(props);
+
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         let trainingPlans = trainingPlanService.getTrainingPlans();
+
         this.state = {
             dataSource: ds.cloneWithRows(trainingPlans),
-            ds: ds,
+            currentTrainingPlanName: currentStateService.getCurrentTrainingPlanName()
         };
+
+        trainingPlanRest.getTrainingPlan()
+    }
+
+    componentDidMount(){
+        currentStateService.setCurrentTrainingPlanModificationListener((object) => {
+            if(object) {
+                this.setState({currentTrainingPlanName: object.currentTrainingPlanName});
+                this.updateListView()
+            }
+        });
     }
 
     updateListView() {
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(trainingPlanService.getTrainingPlans()),
-        });
+        this.setState({dataSource: this.state.dataSource.cloneWithRows(trainingPlanService.getTrainingPlans())});
     }
 
     goToExercises(trainingPlan) {
@@ -45,14 +57,12 @@ export default class TrainingPlanList extends Component {
     addTrainingPlan() {
         console.log("add new training plan");
         this.props.navigator.push({
-            component: <NewTrainingPlanForm navigator={this.props.navigator} updateFunction={this.updateListView.bind(this)}/>,
+            component: <NewTrainingPlanForm navigator={this.props.navigator} updateFunction={() => this.updateListView()}/>,
             sceneConfig: Navigator.SceneConfigs.FloatFromBottom
         });
     }
 
     render() {
-        let currentTrainingPlan = currentStateService.getCurrentTrainingPlanName();
-
         return (
             <Container>
                 <Header>
@@ -67,7 +77,7 @@ export default class TrainingPlanList extends Component {
 
                 <Content>
                     <ListView dataSource={this.state.dataSource} enableEmptySections={true} renderRow={(rowData) =>
-                        <TouchableOpacity style={[styles.trainingPlanElement, currentTrainingPlan == rowData.name ? {backgroundColor: '#F4F4F4'} : null]} onPress={() => this.goToExercises(rowData)}>
+                        <TouchableOpacity style={[styles.trainingPlanElement, this.state.currentTrainingPlanName == rowData.name ? {backgroundColor: '#F4F4F4'} : null]} onPress={() => this.goToExercises(rowData)}>
                             <View style={styles.trainingPlanElementLeft}>
                                 <Text style={styles.boldText}>{rowData.name}</Text>
                                 <Text>{rowData.exercises.length} exercises</Text>
